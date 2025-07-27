@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="#" class="logo" onclick="showSection('home')">NETFLIX</a>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" class="nav-link" onclick="showSection('tv-shows')">TV Shows</a></li>
+                    <li><a href="#" class="nav-link" onclick="showSection('movies')">Movies</a></li>
+                    <li><a href="#" class="nav-link" onclick="showSection('new-popular')">New & Popular</a></li>
+                    <li><a href="#" class="nav-link" onclick="showSection('my-list')">My List</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24" onclick="showSection('search')">
+                    <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/>
+                </svg>
+                <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <div class="profile-icon"></div>
+            </div>
+        </nav>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" onclick="showSection('tv-shows')">TV Shows</a></li>
+                <li><a href="#" onclick="showSection('movies')">Movies</a></li>
+                <li><a href="#" onclick="showSection('new-popular')">New & Popular</a></li>
+                <li><a href="#" onclick="showSection('my-list')">My List</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section class="content-section active" id="home">
+        <div class="hero" id="hero">
+            <video class="hero-video" muted autoplay loop>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            </video>
+            <div class="hero-content">
+                <h1 class="hero-title">Big Buck Bunny</h1>
+                <p class="hero-description">
+                    Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore!
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-play" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 'Big Buck Bunny', 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.')">
+                        <span>▶</span> Play
+                    </button>
+                    <button class="btn btn-info">
+                        <span>ℹ</span> More Info
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <section class="section">
+                <h2 class="section-title">Trending Now</h2>
+                <div class="row" id="trending-row"></div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Popular Movies</h2>
+                <div class="row" id="popular-row"></div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Action & Adventure</h2>
+                <div class="row" id="action-row"></div>
+            </section>
+        </div>
+    </section>
+
+    <!-- TV Shows Section -->
+    <section class="content-section" id="tv-shows">
+        <div style="padding-top: 100px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">TV Shows</h1>
+            <div class="category-grid" id="tv-shows-grid"></div>
+        </div>
+    </section>
+
+    <!-- Movies Section -->
+    <section class="content-section" id="movies">
+        <div style="padding-top: 100px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">Movies</h1>
+            <div class="category-grid" id="movies-grid"></div>
+        </div>
+    </section>
+
+    <!-- New & Popular Section -->
+    <section class="content-section" id="new-popular">
+        <div style="padding-top: 100px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">New & Popular</h1>
+            <div class="category-grid" id="new-popular-grid"></div>
+        </div>
+    </section>
+
+    <!-- My List Section -->
+    <section class="content-section" id="my-list">
+        <div style="padding-top: 100px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">My List</h1>
+            <div class="category-grid" id="my-list-grid">
+                <div style="text-align: center; grid-column: 1/-1; padding: 4rem;">
+                    <h2>Your list is empty</h2>
+                    <p style="color: #b3b3b3; margin-top: 1rem;">Start adding movies and TV shows to create your personal watchlist!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="content-section" id="search">
+        <div class="search-container">
+            <h1 style="margin-bottom: 2rem;">Search</h1>
+            <input type="text" class="search-input" placeholder="Search for movies, TV shows..." id="searchInput">
+            <div class="search-results" id="searchResults">
+                <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
+                    <h2>Start typing to search</h2>
+                    <p style="color: #b3b3b3; margin-top: 1rem;">Find your favorite movies and TV shows</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="close-video">&times;</span>
+            <video class="video-player" id="videoPlayer" controls>
+                <source id="videoSource" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-details">
+                <h2 class="video-title" id="videoTitle">Video Title</h2>
+                <p class="video-description" id="videoDescription">Video description</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-info" onclick="addToMyList()">
+                        <span>+</span> Add to My List
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Netflix</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Supported Devices</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Corporate Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Netflix Clone. This is a demo project with sample videos.</p>
+            </div>
+        </div>
+    </footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
